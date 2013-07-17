@@ -1,0 +1,30 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block body %}
+<div class="row" >
+    <h1>{% trans "Sitios" %}</h1>
+    <table class="table">
+		<thead>
+			<th>Sitio</th><th>Listas</th>
+		</thead>
+		{%for sitio in sitios %}
+		<tr>
+		<td><a href="/listas/sitios/{{sitio.id}}/" >{{sitio.nombre}}</a></td>
+		<td>
+			<ul>
+			{% for lista in sitio.lista_set.all %}
+			<li><a href="{{ lista.get_absolute_url }}">{{lista.nombre}}</a></li>
+			{% endfor %}
+			</ul>
+		</td>
+		</tr>
+		{% endfor %}
+    </table>
+</div>
+{% endblock %}
