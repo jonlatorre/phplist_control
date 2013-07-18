@@ -18,9 +18,9 @@ class Sitio(models.Model):
 
 
 class Lista(models.Model):
-    sitio = models.ForeignKey(Sitio)
+    sitio = models.ForeignKey(Sitio,blank=True)
     nombre = models.CharField(max_length=25)
-    usuarios =  models.ManyToManyField(Usuario)
+    usuarios =  models.ManyToManyField(Usuario,blank=True)
     def __unicode__(self):
         return "%s"%self.nombre
     def get_absolute_url(self):
