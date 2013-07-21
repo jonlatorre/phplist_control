@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 import MySQLdb as mdb
-import hashlib, sys
+import hashlib, sys, os
 
 class Usuario(models.Model):
     nombre = models.CharField(max_length=25)
@@ -18,6 +18,13 @@ class Sitio(models.Model):
         return "%s"%self.nombre
     def get_absolute_url(self):
         return "/listas/sitios/%d/"%self.id
+        
+    def save(self):
+		print "Somos la funcion personal de guardar sitio"
+		if self.pk is None:
+			print "Es la primera vez que nos salvan.."
+			os.system("sudo /var/www/mailing/crear_instanacia.sh")
+		super(Lista, self).save()
 
 
 class Lista(models.Model):
