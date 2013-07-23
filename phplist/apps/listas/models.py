@@ -23,8 +23,8 @@ class Sitio(models.Model):
 		print "Somos la funcion personal de guardar sitio"
 		if self.pk is None:
 			print "Es la primera vez que nos salvan.."
-			os.system("sudo /var/www/mailing/crear_instanacia.sh")
-		super(Lista, self).save()
+			#os.system("sudo /var/www/mailing/crear_instanacia.sh")
+		super(Sitio, self).save()
 
 
 class Lista(models.Model):
@@ -39,6 +39,9 @@ class Lista(models.Model):
 		print "Somos la funcion personal de guardar"
 		if self.pk is None:
 			print "Es la primera vez que nos salvan.."
+		else:
+			print "lanzamos la sincro"
+			sincronizar_sitios_listas()
 		super(Lista, self).save()
 
 def sincronizar_sitios_listas():

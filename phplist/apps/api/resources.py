@@ -54,20 +54,20 @@ class ListaResource(ModelResource):
         return ret
     def hydrate(self, bundle):
         nombre_sitio=bundle.data['sitio']
-        print "Establecemos el sitio con el nombre %s"%nombre_sitio
+        #print "Establecemos el sitio con el nombre %s"%nombre_sitio
         bundle.obj.sitio = Sitio.objects.get(nombre=nombre_sitio)
-        print "Vamos a procesar los usuarios"
+        #print "Vamos a procesar los usuarios"
         usuarios = bundle.data['usuarios']
         #primero hacemos un save porque sino no nos deja hacer el usuarios.add
         bundle.obj.save()
         for nombre in usuarios:
             email = usuarios[nombre]
             usuario,created = Usuario.objects.get_or_create(nombre=nombre,email=email)
-            if created:
-                print "Creando el usuario %d %s-%s"%(usuario.id,usuario.nombre,usuario.email)
-            else:
-                print "Ya existia el user %d %s-%s"%(usuario.id,usuario.nombre,usuario.email)
-            print "Añadimos el user"
+            #if created:
+            #    print "Creando el usuario %d %s-%s"%(usuario.id,usuario.nombre,usuario.email)
+            #else:
+            #    print "Ya existia el user %d %s-%s"%(usuario.id,usuario.nombre,usuario.email)
+            #print "Añadimos el user"
             bundle.obj.usuarios.add(usuario)
         return bundle
         
